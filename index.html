@@ -1,0 +1,217 @@
+Nenhum selecionado 
+
+Pular para o conteúdo
+Como usar o E-mail de SEED com leitores de tela
+in:sent 
+
+Conversas
+ 
+Regulamentos do programa
+Powered by Google
+Última atividade da conta: há 2 dias
+Detalhes
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encomendas de Bolos, Doces e Salgados</title>
+     <link rel="stylesheet" href="style.css">
+    <style>
+        /* Estilos básicos para a visualização de impressão */
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            #pedido-final, #pedido-final * {
+                visibility: visible;
+            }
+            #pedido-final {
+                position: absolute;
+                left: 0;
+                top: 0;
+            }
+        }
+        #pedido-final {
+            display: none; /* Oculta a seção de impressão inicialmente */
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #ccc;
+        }
+        #pedido-final h2 {
+            margin-top: 0;
+        }
+        .item-pedido {
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Faça sua Encomenda! Aqui Na Mada Bolos!!!</h1>
+
+    <section>
+        <h2>Bolos por Kg - R$ 55,00/Kg</h2>
+        <form id="form-bolos">
+            <div>
+                <label for="bolo-sabor">Sabor:</label>
+                <select id="bolo-sabor" name="bolo-sabor">
+                    <option value="chocolate">Dois Amores</option>
+                    <option value="morango">Brigadeiro</option>
+                    <option value="cenoura">Prestigio</option>
+                    </select>
+            </div>
+            <div>
+                <label for="bolo-peso">Peso (Kg):</label>
+                <input type="number" id="bolo-peso" name="bolo-peso" min="1" value="1">
+            </div>
+            <div>
+                <label for="bolo-observacoes">Observações:</label>
+                <textarea id="bolo-observacoes" name="bolo-observacoes"></textarea>
+            </div>
+            <button type="button" onclick="adicionarAoCarrinho('bolo')">Adicionar Bolo</button>
+        </form>
+    </section>
+
+    <section>
+        <h2>Doces por Cento - R$ 55,00/Cento</h2>
+        <form id="form-doces">
+            <div>
+                <label for="doce-tipo">Tipo:</label>
+                <select id="doce-tipo" name="doce-tipo">
+                    <option value="brigadeiro">Brigadeiro</option>
+                    <option value="beijinho">Beijinho</option>
+                    <option value="cajuzinho">Cajuzinho</option>
+                    </select>
+            </div>
+            <div>
+                <label for="doce-quantidade">Quantidade (Centos):</label>
+                <input type="number" id="doce-quantidade" name="doce-quantidade" min="1" value="1">
+            </div>
+            <div>
+                <label for="doce-observacoes">Observações:</label>
+                <textarea id="doce-observacoes" name="doce-observacoes"></textarea>
+            </div>
+            <button type="button" onclick="adicionarAoCarrinho('doce')">Adicionar Doces</button>
+        </form>
+    </section>
+
+    <section>
+        <h2>Salgados por Cento - R$ 55,00/Cento</h2>
+        <form id="form-salgados">
+            <div>
+                <label for="salgado-tipo">Tipo:</label>
+                <select id="salgado-tipo" name="salgado-tipo">
+                    <option value="coxinha">Coxinha</option>
+                    <option value="risole">Risole</option>
+                    <option value="bolinha-queijo">Bolinha de Queijo</option>
+                    </select>
+            </div>
+            <div>
+                <label for="salgado-quantidade">Quantidade (Centos):</label>
+                <input type="number" id="salgado-quantidade" name="salgado-quantidade" min="1" value="1">
+            </div>
+            <div>
+                <label for="salgado-observacoes">Observações:</label>
+                <textarea id="salgado-observacoes" name="salgado-observacoes"></textarea>
+            </div>
+            <button type="button" onclick="adicionarAoCarrinho('salgado')">Adicionar Salgados</button>
+        </form>
+    </section>
+
+    <section id="carrinho">
+        <h2>Seu Carrinho</h2>
+        <ul id="lista-carrinho">
+            </ul>
+        <p>Total: R$ <span id="total-carrinho">0.00</span></p>
+        <button type="button" onclick="exibirPedidoFinal()">Finalizar Pedido e Imprimir</button>
+    </section>
+
+    <div id="pedido-final">
+        <h2>Pedido Final</h2>
+        <ul id="lista-pedido-final">
+        </ul>
+        <p>Total do Pedido: R$ <span id="total-pedido-final">0.00</span></p>
+    </div>
+
+    <script>
+        let carrinho = [];
+        const precoBoloKg = 55;
+        const precoDoceCento = 65;
+        const precoSalgadoCento = 55;
+        const listaCarrinho = document.getElementById('lista-carrinho');
+        const totalCarrinhoElement = document.getElementById('total-carrinho');
+        const pedidoFinalDiv = document.getElementById('pedido-final');
+        const listaPedidoFinal = document.getElementById('lista-pedido-final');
+        const totalPedidoFinalElement = document.getElementById('total-pedido-final');
+
+        function adicionarAoCarrinho(tipo) {
+            let item;
+            let quantidade;
+            let preco;
+            let observacoes;
+
+            if (tipo === 'bolo') {
+                const sabor = document.getElementById('bolo-sabor').value;
+                const peso = parseFloat(document.getElementById('bolo-peso').value);
+                observacoes = document.getElementById('bolo-observacoes').value;
+                preco = precoBoloKg * peso;
+                item = { tipo: 'Bolo', item: sabor, quantidade: peso + ' Kg', preco: preco, observacoes: observacoes };
+            } else if (tipo === 'doce') {
+                const doceTipo = document.getElementById('doce-tipo').value;
+                quantidade = parseInt(document.getElementById('doce-quantidade').value);
+                observacoes = document.getElementById('doce-observacoes').value;
+                preco = precoDoceCento * quantidade;
+                item = { tipo: 'Doce', item: doceTipo, quantidade: quantidade + ' Centos', preco: preco, observacoes: observacoes };
+            } else if (tipo === 'salgado') {
+                const salgadoTipo = document.getElementById('salgado-tipo').value;
+                quantidade = parseInt(document.getElementById('salgado-quantidade').value);
+                observacoes = document.getElementById('salgado-observacoes').value;
+                preco = precoSalgadoCento * quantidade;
+                item = { tipo: 'Salgado', item: salgadoTipo, quantidade: quantidade + ' Centos', preco: preco, observacoes: observacoes };
+            }
+
+            if (item) {
+                carrinho.push(item);
+                atualizarCarrinho();
+            }
+        }
+
+        function atualizarCarrinho() {
+            listaCarrinho.innerHTML = '';
+            let total = 0;
+
+            carrinho.forEach(item => {
+                const listItem = document.createElement('li');
+                listItem.textContent = `${item.tipo}: ${item.item}, Quantidade: ${item.quantidade}, Preço: R$ ${item.preco.toFixed(2)}`;
+                listaCarrinho.appendChild(listItem);
+                total += item.preco;
+            });
+
+            totalCarrinhoElement.textContent = total.toFixed(2);
+        }
+
+        function exibirPedidoFinal() {
+            listaPedidoFinal.innerHTML = '';
+            let totalFinal = 0;
+
+            carrinho.forEach(item => {
+                const listItem = document.createElement('li');
+                listItem.classList.add('item-pedido');
+                listItem.innerHTML = `<strong>${item.tipo}:</strong> ${item.item}, Quantidade: ${item.quantidade}, Preço: R$ ${item.preco.toFixed(2)}`;
+                if (item.observacoes) {
+                    listItem.innerHTML += `<br>Observações: ${item.observacoes}`;
+                }
+                listaPedidoFinal.appendChild(listItem);
+                totalFinal += item.preco;
+            });
+
+            totalPedidoFinalElement.textContent = totalFinal.toFixed(2);
+            pedidoFinalDiv.style.display = 'block'; // Exibe a seção do pedido final
+            window.print(); // Abre a janela de impressão do navegador
+            pedidoFinalDiv.style.display = 'none'; // Oculta novamente após (tentativa de impressão)
+        }
+    </script>
+</body>
+</html>
+index.html
+Exibindo index.html.
