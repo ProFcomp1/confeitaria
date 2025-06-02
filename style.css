@@ -1,0 +1,147 @@
+Nenhum selecionado 
+
+Pular para o conteúdo
+Como usar o E-mail de SEED com leitores de tela
+in:sent 
+
+Conversas
+ 
+Regulamentos do programa
+Powered by Google
+Última atividade da conta: há 2 dias
+Detalhes
+/* Estilos gerais para a página */
+body {
+    font-family: sans-serif;
+    margin: 20px;
+    background-color: #f4f4f4;
+}
+
+h1, h2 {
+    color: #c77800; /* Cor da marca Mada Bolos (exemplo) */
+}
+
+section {
+    background-color: #fff;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+}
+
+select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-repeat: no-repeat;
+    background-position: center right;
+    background-size: contain; /* Ajusta a imagem para caber dentro */
+}
+
+input[type="number"],
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+button {
+    background-color: #c77800; /* Cor da marca Mada Bolos */
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #a66300;
+}
+
+/* Estilos específicos para os selects com imagens */
+#bolo-sabor {
+    background-image: url('bolo brigadeiro.jpg'); /* Imagem padrão */
+}
+
+#bolo-sabor option[value="chocolate"] {
+    background-image: url('imagens/bolo_chocolate_mada.jpg');
+}
+
+#bolo-sabor option[value="morango"] {
+    background-image: url('imagens/bolo_morango_mada.jpg');
+}
+
+#bolo-sabor option[value="cenoura"] {
+    background-image: url('imagens/bolo_cenoura_mada.jpg');
+}
+
+#doce-tipo {
+    background-image: url('imagens/doce_brigadeiro_mada.jpg'); /* Imagem padrão */
+}
+
+#doce-tipo option[value="brigadeiro"] {
+    background-image: url('brigadeiro.jpg');
+}
+
+#doce-tipo option[value="beijinho"] {
+    background-image: url('beijinho.jpg');
+}
+
+#doce-tipo option[value="cajuzinho"] {
+    background-image: url('cajuzinho.jpg');
+}
+
+#salgado-tipo {
+    background-image: url('coxinha.jpg'); /* Imagem padrão */
+}
+
+#salgado-tipo option[value="coxinha"] {
+    background-image: url('coxinha.jpg');
+}
+
+#salgado-tipo option[value="risole"] {
+    background-image: url('risoles.jpg');
+}
+
+#salgado-tipo option[value="bolinha-queijo"] {
+    background-image: url('bolinha.jpg');
+}
+
+/* Estilos para o carrinho e pedido final */
+#carrinho, #pedido-final {
+    background-color: #f9f9f9;
+    padding: 15px;
+    border: 1px solid #eee;
+    border-radius: 8px;
+}
+
+#lista-carrinho li, #lista-pedido-final li {
+    padding: 8px 0;
+    border-bottom: 1px dashed #ddd;
+}
+
+#lista-carrinho li:last-child, #lista-pedido-final li:last-child {
+    border-bottom: none;
+}
+
+#total-carrinho, #total-pedido-final {
+    font-weight: bold;
+    color: #c77800;
+}
+style.css
+Exibindo index.html.
